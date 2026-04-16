@@ -252,7 +252,11 @@ DOCUMENTS = [
 # =========================
 # Cache heavy resources
 # =========================
-import os
+
+@st.cache_resource(show_spinner="Loading embedding model...")
+def load_embedding_model():
+    from langchain_huggingface import HuggingFaceEmbeddings
+    return HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 @st.cache_resource(show_spinner="Building vector database...")
 def build_vector_store(_documents: tuple):
@@ -298,6 +302,8 @@ def build_vector_store(_documents: tuple):
     )
 
     return vector_store, chunks
+
+vector_store, chunks = build_vector_store(tuple(DOCUMENTS))
 # =========================
 # Sidebar
 # =========================
@@ -362,8 +368,6 @@ elif page == "Search":
     </div>
     """, unsafe_allow_html=True)
 
-    vector_store, chunks = build_vector_store(tuple(DOCUMENTS))
-
     sample_cols = st.columns(4)
     samples = [
         "Who has won the most Bundesliga titles?",
@@ -412,7 +416,6 @@ elif page == "Explore Chunks":
     </div>
     """, unsafe_allow_html=True)
 
-    _, chunks = build_vector_store(tuple(DOCUMENTS))
     lengths = [len(c) for c in chunks]
 
     m1, m2, m3, m4 = st.columns(4)
