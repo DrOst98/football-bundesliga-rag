@@ -1,33 +1,162 @@
-"""
-RAG Knowledge Base - Starter Template
-FAMNIT AI Course - Day 3
-
-A simple Retrieval-Augmented Generation (RAG) app built with
-Streamlit, LangChain, and ChromaDB. No API keys needed!
-
-Instructions:
-    1. Replace the DOCUMENTS list below with your own texts
-    2. Update the app title and description
-    3. Run locally:  streamlit run app.py
-    4. Deploy to Render (see assignment instructions)
-"""
-
 import streamlit as st
 import numpy as np
+import base64
+from statistics import mean
 
 st.set_page_config(
-    page_title="My RAG Knowledge Base",
-    page_icon="🔍",
+    page_title="Bundesliga RAG Explorer",
+    page_icon="⚽",
     layout="wide",
+    initial_sidebar_state="expanded",
 )
 
-# ──────────────────────────────────────────────────────────────────────
-# YOUR DOCUMENTS — Replace these with your own topic!
-# Each string is one "document" that will be chunked, embedded, and
-# stored in the vector database for semantic search.
-# ──────────────────────────────────────────────────────────────────────
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
+# =========================
+# Custom styling
+# =========================
+
+bg_image = get_base64_image("visuals/dortmund-stadium-view-scaled.jpg")
+
+st.markdown(f"""
+<style>
+:root {{
+    --bg: #0e1117;
+    --card: linear-gradient(135deg, rgba(26,32,44,0.95), rgba(17,24,39,0.92));
+    --accent: #d00027;
+    --accent-2: #ffd166;
+    --text: #f5f7fb;
+    --muted: #b9c0cc;
+    --border: rgba(255,255,255,0.10);
+}}
+
+.stApp {{
+    background: transparent;
+}}
+
+.stApp::before {{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        linear-gradient(rgba(10, 14, 22, 0.85), rgba(10, 14, 22, 0.85)),
+        url("data:image/jpeg;base64,{bg_image}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: -2;
+}}
+
+.stApp::after {{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top right, rgba(208,0,39,0.18), transparent 25%);
+    z-index: -1;
+}}
+
+.block-container {{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}}
+
+section[data-testid="stSidebar"] {{
+    background: linear-gradient(180deg, rgba(16,23,34,0.92) 0%, rgba(13,19,29,0.95) 100%);
+    border-right: 1px solid var(--border);
+}}
+
+.hero {{
+    padding: 1.6rem 1.8rem;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(208,0,39,0.88), rgba(120,0,30,0.90));
+    box-shadow: 0 18px 50px rgba(0,0,0,0.30);
+    margin-bottom: 1rem;
+}}
+
+.hero h1 {{
+    color: white;
+    margin: 0;
+    font-size: 2.5rem;
+}}
+
+.hero p {{
+    color: rgba(255,255,255,0.92);
+    margin-top: 0.6rem;
+    font-size: 1.05rem; 
+}}
+
+.card {{
+    background: rgba(15, 23, 35, 0.78);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.1rem 1.2rem;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+}}
+
+.mini-card {{
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1rem;
+    height: 100%;
+}}
+
+.result-card {{
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-left: 5px solid var(--accent);
+    border-radius: 16px;
+    padding: 1rem 1rem 0.7rem 1rem;
+    margin-bottom: 0.8rem;
+}}
+
+.badge {{
+    display: inline-block;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(255,209,102,0.16);
+    color: #ffe08a;
+    font-size: 0.82rem;
+    border: 1px solid rgba(255,209,102,0.25);
+    margin-right: 0.45rem;
+    margin-bottom: 0.35rem;
+}}
+
+.small-muted {{
+    color: var(--muted);
+    font-size: 0.95rem;
+}}
+
+div[data-testid="metric-container"] {{
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 0.8rem;
+    border-radius: 16px;
+}}
+
+.stTextInput > div > div > input {{
+    border-radius: 14px;
+}}
+</style>
+""", unsafe_allow_html=True)
+
+# =========================
+# DOCUMENTS
+# =========================
 DOCUMENTS = [
-    # 1. History and Founding of the Bundesliga (~350 words)
+      # 1. History and Founding of the Bundesliga (~350 words)
     """
     The Bundesliga, Germany's top professional football league, was founded in 1963 to modernize and centralize German football. Prior to its creation, football in West Germany was organized in regional leagues called Oberligen. The national champion was then decided through a playoff system between regional winners. After Germany’s disappointing performance at the 1962 World Cup, football officials wanted a stronger national league that could improve the level of competition and help German clubs and players develop more consistently.
     On July 28, 1962, the German Football Association voted in favor of creating the Bundesliga. The league began with 16 founding clubs, selected according to sporting success, economic stability, and regional balance. The first Bundesliga season started in August 1963, and 1. FC Köln became the first champion. Over time, the league expanded, introduced promotion and relegation changes, and developed into one of the strongest football leagues in Europe.
@@ -119,123 +248,260 @@ DOCUMENTS = [
     """      
 ]
 
-# ──────────────────────────────────────────────────────────────────────
-# Cached heavy resources (loaded once, reused across reruns)
-# ──────────────────────────────────────────────────────────────────────
-
+# =========================
+# Cache heavy resources
+# =========================
 @st.cache_resource(show_spinner="Loading embedding model...")
 def load_embedding_model():
     from langchain_huggingface import HuggingFaceEmbeddings
     return HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
-
 @st.cache_resource(show_spinner="Building vector database...")
 def build_vector_store(_documents: tuple):
-    """Chunk documents, embed them, and store in ChromaDB."""
     from langchain_text_splitters import RecursiveCharacterTextSplitter
     from langchain_community.vectorstores import Chroma
 
-    # --- Chunking ---
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=300,
-        chunk_overlap=50,
+        chunk_size=250,
+        chunk_overlap=40,
         separators=["\n\n", "\n", ". ", " ", ""],
     )
+
     chunks = []
     for doc in _documents:
-        chunks.extend(splitter.split_text(doc))
+        chunks.extend(splitter.split_text(doc.strip()))
 
     embeddings = load_embedding_model()
 
-    # --- Store in ChromaDB ---
     vector_store = Chroma.from_texts(
         texts=chunks,
         embedding=embeddings,
-        collection_name="knowledge_base",
+        collection_name="bundesliga_knowledge_base",
     )
     return vector_store, chunks
 
-# ──────────────────────────────────────────────────────────────────────
-# SIDEBAR
-# ──────────────────────────────────────────────────────────────────────
-st.sidebar.title("My RAG App")
-page = st.sidebar.radio("Navigate", ["Home", "Search", "Explore Chunks"])
+# =========================
+# Sidebar
+# =========================
+st.sidebar.markdown("## ⚽ Bundesliga RAG")
+st.sidebar.caption("Semantic search through Bundesliga knowledge")
+page = st.sidebar.radio("Navigate", ["Home", "Search", "Explore Chunks", "Statistics", "About"])
+st.sidebar.markdown("---")
+st.sidebar.markdown("### Quick Topics")
+st.sidebar.markdown("- History\n- Clubs\n- Derbies\n- Fans\n- 50+1 Rule")
+st.sidebar.markdown("---")
+st.sidebar.info("Model: all-MiniLM-L6-v2\n\nChunking: 300 / 50")
 
-# ──────────────────────────────────────────────────────────────────────
-# HOME PAGE
-# ──────────────────────────────────────────────────────────────────────
+# =========================
+# Home
+# =========================
 if page == "Home":
-    st.title("My RAG Knowledge Base")
     st.markdown("""
-    Welcome! This app lets you **search documents by meaning**, not just keywords.
+    <div class="hero">
+        <h1>⚽ Bundesliga RAG Explorer</h1>
+        <p>Explore German football with semantic search. Search by meaning, discover rivalries, clubs, records, fan culture, and the history behind one of Europe's most iconic leagues.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    ### How it works
-    1. **Documents** are split into small chunks
-    2. Each chunk is converted to an **embedding** (a vector of numbers)
-    3. Chunks are stored in a **vector database** (ChromaDB)
-    4. When you search, your query is embedded and compared to all chunks
-    5. The most **semantically similar** chunks are returned
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Documents", len(DOCUMENTS))
+    c2.metric("Topic Areas", 10)
+    c3.metric("Embedding Model", "MiniLM")
 
-    ### Get started
-    - Go to **Search** to ask questions
-    - Go to **Explore Chunks** to see how documents are split
+    st.markdown("<br>", unsafe_allow_html=True)
+    col1, col2 = st.columns([1.4, 1])
 
-    ---
-    *Built with Streamlit, LangChain, and ChromaDB*
-    """)
+    with col1:
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.subheader("What this app does")
+        st.write(
+            "This Streamlit app uses embeddings and a Chroma vector database to search Bundesliga texts semantically. "
+            "Instead of matching only keywords, it finds passages that are similar in meaning to your query."
+        )
+        st.markdown("#### Try questions like:")
+        st.markdown("- Which club has won the most Bundesliga titles?\n- What is the 50+1 rule?\n- Which rivalries are most famous?\n- How does promotion and relegation work?\n- What makes Bundesliga fan culture special?")
+        st.markdown('</div>', unsafe_allow_html=True)
 
-    st.info(f"Knowledge base contains **{len(DOCUMENTS)} documents**.")
+    with col2:
+        st.markdown('<div class="card">', unsafe_allow_html=True)
+        st.subheader("Knowledge areas")
+        tags = [
+            "History", "League Format", "Top Clubs", "Derbies", "Records",
+            "Iconic Players", "Current Season", "Fan Culture", "50+1 Rule", "Europe"
+        ]
+        st.markdown("".join([f'<span class="badge">{tag}</span>' for tag in tags]), unsafe_allow_html=True)
+        st.markdown("<p class='small-muted'>Use the Search page to retrieve the most relevant chunks from these ten topic areas.</p>", unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
 
-
-# ──────────────────────────────────────────────────────────────────────
-# SEARCH PAGE
-# ──────────────────────────────────────────────────────────────────────
+# =========================
+# Search
+# =========================
 elif page == "Search":
-    st.title("Semantic Search")
-    st.markdown("Ask a question and the app will find the most relevant chunks from the knowledge base.")
+    st.markdown("""
+    <div class="hero">
+        <h1>🔎 Semantic Search</h1>
+        <p>Ask a question about Bundesliga history, clubs, structure, rivalries, fan culture, or financial rules.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     vector_store, chunks = build_vector_store(tuple(DOCUMENTS))
 
+    sample_cols = st.columns(4)
+    samples = [
+        "Who has won the most Bundesliga titles?",
+        "What is the 50+1 rule?",
+        "Which derby is the most famous?",
+        "How does relegation work?"
+    ]
+    for col, q in zip(sample_cols, samples):
+        with col:
+            st.caption("Example")
+            st.code(q, language=None)
+
     query = st.text_input(
-        "Your question",
-        placeholder="e.g. What is RAG?",
+        "Search the knowledge base",
+        placeholder="e.g. Why is Bundesliga fan culture considered special?",
     )
-    num_results = st.slider("Number of results", 1, 10, 3)
+    num_results = st.slider("Number of results", 1, 8, 4)
 
     if query:
-        with st.spinner("Searching..."):
+        with st.spinner("Searching semantic matches..."):
             results = vector_store.similarity_search_with_score(query, k=num_results)
 
         st.subheader(f"Top {len(results)} results")
         for i, (doc, score) in enumerate(results, 1):
-            # ChromaDB returns distance; lower = more similar
-            similarity = max(0, 1 - score)  # rough conversion
-            with st.container():
-                st.markdown(f"**Result {i}** — relevance: `{similarity:.2f}`")
-                st.markdown(f"> {doc.page_content}")
-                st.divider()
+            similarity = max(0.0, 1 - float(score))
+            st.markdown(f'<div class="result-card">', unsafe_allow_html=True)
+            st.markdown(f"**Result {i}**")
+            st.progress(min(similarity, 1.0))
+            st.caption(f"Estimated relevance: {similarity:.2f}")
+            st.write(doc.page_content)
+            st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown("---")
-    st.caption("Powered by all-MiniLM-L6-v2 embeddings + ChromaDB")
+    else:
+        st.info("Enter a question above to search the Bundesliga knowledge base.")
 
-# ──────────────────────────────────────────────────────────────────────
-# EXPLORE CHUNKS PAGE
-# ──────────────────────────────────────────────────────────────────────
+    st.caption("Powered by all-MiniLM-L6-v2 embeddings and ChromaDB.")
+
+# =========================
+# Explore Chunks
+# =========================
 elif page == "Explore Chunks":
-    st.title("Explore Chunks")
-    st.markdown("See how your documents are split into chunks by the recursive text splitter.")
+    st.markdown("""
+    <div class="hero">
+        <h1>🧩 Explore Chunks</h1>
+        <p>Inspect how the recursive text splitter breaks the documents into searchable semantic pieces.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    vector_store, chunks = build_vector_store(tuple(DOCUMENTS))
-    st.metric("Total chunks", len(chunks))
-
+    _, chunks = build_vector_store(tuple(DOCUMENTS))
     lengths = [len(c) for c in chunks]
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Avg chunk size", f"{np.mean(lengths):.0f} chars")
-    col2.metric("Min chunk size", f"{min(lengths)} chars")
-    col3.metric("Max chunk size", f"{max(lengths)} chars")
 
-    st.subheader("All chunks")
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("Total chunks", len(chunks))
+    m2.metric("Average size", f"{mean(lengths):.0f} chars")
+    m3.metric("Smallest", f"{min(lengths)} chars")
+    m4.metric("Largest", f"{max(lengths)} chars")
+
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.subheader("Why chunking matters")
+    st.write(
+        "Chunking affects retrieval quality. Smaller chunks can be more precise, while larger chunks preserve more context. "
+        "This app currently uses chunk_size=300 and chunk_overlap=50 as a balanced strategy for medium-length Bundesliga texts."
+    )
+    st.markdown('</div>', unsafe_allow_html=True)
+
     for i, chunk in enumerate(chunks, 1):
-        with st.expander(f"Chunk {i} ({len(chunk)} chars)"):
-            st.text(chunk)
+        with st.expander(f"Chunk {i} — {len(chunk)} characters"):
+            st.write(chunk)
 
+# =========================
+# Statistics & Visualization
+# =========================
+elif page == "Statistics":
+    st.markdown("""
+    <div class="hero">
+        <h1>📊 Statistics & Visualization</h1>
+        <p>Explore document lengths, chunk counts, and how chunking strategy changes the structure of the knowledge base.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+    doc_lengths = [len(doc.strip()) for doc in DOCUMENTS]
+    doc_names = [f"Doc {i}" for i in range(1, len(DOCUMENTS) + 1)]
+
+    st.subheader("Document lengths")
+    st.bar_chart(
+        {
+            "Document Length": doc_lengths
+        }
+    )
+
+    splitter_current = RecursiveCharacterTextSplitter(
+        chunk_size=300,
+        chunk_overlap=50,
+        separators=["\n\n", "\n", ". ", " ", ""],
+    )
+
+    chunk_counts = [len(splitter_current.split_text(doc.strip())) for doc in DOCUMENTS]
+
+    st.subheader("Chunks per document")
+    st.bar_chart(
+        {
+            "Chunks": chunk_counts
+        }
+    )
+
+    st.subheader("Chunking strategy comparison")
+
+    chunk_sizes = [200, 300, 500]
+    comparison_data = {}
+
+    for size in chunk_sizes:
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=size,
+            chunk_overlap=50,
+            separators=["\n\n", "\n", ". ", " ", ""],
+        )
+        total_chunks = sum(len(splitter.split_text(doc.strip())) for doc in DOCUMENTS)
+        comparison_data[f"chunk_size={size}"] = total_chunks
+
+    st.bar_chart(comparison_data)
+
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.subheader("Why this matters")
+    st.write(
+        "Smaller chunk sizes create more chunks and may improve precision, while larger chunk sizes preserve more context. "
+        "This comparison helps explain why chunking is an important design choice in semantic search applications."
+    )
+    st.markdown("</div>", unsafe_allow_html=True)
+
+# =========================
+# About
+# =========================
+elif page == "About":
+    st.markdown("""
+    <div class="hero">
+        <h1>ℹ️ About This Project</h1>
+        <p>A small semantic search app built for a Retrieval-Augmented Generation homework assignment using Streamlit, LangChain, ChromaDB, and sentence-transformer embeddings.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    c1, c2 = st.columns(2)
+    with c1:
+        st.markdown('<div class="mini-card">', unsafe_allow_html=True)
+        st.subheader("Tech stack")
+        st.markdown("- Streamlit\n- LangChain\n- ChromaDB\n- sentence-transformers\n- all-MiniLM-L6-v2")
+        st.markdown('</div>', unsafe_allow_html=True)
+    with c2:
+        st.markdown('<div class="mini-card">', unsafe_allow_html=True)
+        st.subheader("Project focus")
+        st.markdown("- Bundesliga history\n- Clubs and records\n- Rivalries\n- Fan culture\n- Financial rules")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.success("This app demonstrates how semantic search can turn a small document collection into a searchable knowledge base.")
+
+
+    
