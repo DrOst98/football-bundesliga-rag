@@ -4,7 +4,7 @@ A semantic search application for Bundesliga football knowledge, built with **St
 
 ## 🚀 Live Demo
 
-[Try the live app](https://your-render-url.streamlit.app)
+[Try the live app](https://football-bundesliga-rag.onrender.com/)
 
 ## 📖 What it does
 

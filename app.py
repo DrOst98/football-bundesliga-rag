@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import base64
+import os
 from statistics import mean
 
 st.set_page_config(
@@ -251,15 +252,33 @@ DOCUMENTS = [
 # =========================
 # Cache heavy resources
 # =========================
-@st.cache_resource(show_spinner="Loading embedding model...")
-def load_embedding_model():
-    from langchain_huggingface import HuggingFaceEmbeddings
-    return HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+import os
 
 @st.cache_resource(show_spinner="Building vector database...")
 def build_vector_store(_documents: tuple):
     from langchain_text_splitters import RecursiveCharacterTextSplitter
     from langchain_community.vectorstores import Chroma
+
+    persist_directory = "chroma_db"
+    embeddings = load_embedding_model()
+
+    if os.path.exists(persist_directory):
+        vector_store = Chroma(
+            persist_directory=persist_directory,
+            embedding_function=embeddings,
+            collection_name="bundesliga_knowledge_base",
+        )
+
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=250,
+            chunk_overlap=40,
+            separators=["\n\n", "\n", ". ", " ", ""],
+        )
+        chunks = []
+        for doc in _documents:
+            chunks.extend(splitter.split_text(doc.strip()))
+
+        return vector_store, chunks
 
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=250,
@@ -271,15 +290,14 @@ def build_vector_store(_documents: tuple):
     for doc in _documents:
         chunks.extend(splitter.split_text(doc.strip()))
 
-    embeddings = load_embedding_model()
-
     vector_store = Chroma.from_texts(
         texts=chunks,
         embedding=embeddings,
         collection_name="bundesliga_knowledge_base",
+        persist_directory=persist_directory,
     )
-    return vector_store, chunks
 
+    return vector_store, chunks
 # =========================
 # Sidebar
 # =========================
@@ -407,7 +425,7 @@ elif page == "Explore Chunks":
     st.subheader("Why chunking matters")
     st.write(
         "Chunking affects retrieval quality. Smaller chunks can be more precise, while larger chunks preserve more context. "
-        "This app currently uses chunk_size=300 and chunk_overlap=50 as a balanced strategy for medium-length Bundesliga texts."
+        "This app currently uses chunk_size=250 and chunk_overlap=40 as a balanced strategy for medium-length Bundesliga texts."
     )
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -439,8 +457,8 @@ elif page == "Statistics":
     )
 
     splitter_current = RecursiveCharacterTextSplitter(
-        chunk_size=300,
-        chunk_overlap=50,
+        chunk_size=250,
+        chunk_overlap=40,
         separators=["\n\n", "\n", ". ", " ", ""],
     )
 
@@ -461,7 +479,7 @@ elif page == "Statistics":
     for size in chunk_sizes:
         splitter = RecursiveCharacterTextSplitter(
             chunk_size=size,
-            chunk_overlap=50,
+            chunk_overlap=40,
             separators=["\n\n", "\n", ". ", " ", ""],
         )
         total_chunks = sum(len(splitter.split_text(doc.strip())) for doc in DOCUMENTS)
