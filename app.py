@@ -235,7 +235,7 @@ DOCUMENTS = [
 @st.cache_resource(show_spinner="Loading embedding model...")
 def load_embedding_model():
     from langchain_huggingface import HuggingFaceEmbeddings
-    return HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    return HuggingFaceEmbeddings(model_name="all-MiniLM-L12-v2")
 
 @st.cache_resource(show_spinner="Building vector database...")
 def build_vector_store(_documents: tuple):
@@ -293,7 +293,7 @@ st.sidebar.markdown("---")
 st.sidebar.markdown("### Quick Topics")
 st.sidebar.markdown("- History\n- Clubs\n- Derbies\n- Fans\n- 50+1 Rule")
 st.sidebar.markdown("---")
-st.sidebar.info("Model: all-MiniLM-L6-v2\n\nChunking: 300 / 50")
+st.sidebar.info("Model: all-MiniLM-L12-v2\n\nChunking: 300 / 50")
 
 # =========================
 # Home
@@ -308,7 +308,7 @@ if page == "Home":
 
     c1, c2, c3 = st.columns(3)
     c1.metric("Documents", len(DOCUMENTS))
-    c2.metric("Topic Areas", 10)
+    c2.metric("Topic Areas", 8)
     c3.metric("Embedding Model", "MiniLM")
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -382,7 +382,7 @@ elif page == "Search":
     else:
         st.info("Enter a question above to search the Bundesliga knowledge base.")
 
-    st.caption("Powered by all-MiniLM-L6-v2 embeddings and ChromaDB.")
+    st.caption("Powered by all-MiniLM-L12-v2 embeddings and ChromaDB.")
 
 # =========================
 # Explore Chunks
@@ -492,7 +492,7 @@ elif page == "About":
     with c1:
         st.markdown('<div class="mini-card">', unsafe_allow_html=True)
         st.subheader("Tech stack")
-        st.markdown("- Streamlit\n- LangChain\n- ChromaDB\n- sentence-transformers\n- all-MiniLM-L6-v2")
+        st.markdown("- Streamlit\n- LangChain\n- ChromaDB\n- sentence-transformers\n- all-MiniLM-L12-v2")
         st.markdown('</div>', unsafe_allow_html=True)
     with c2:
         st.markdown('<div class="mini-card">', unsafe_allow_html=True)
