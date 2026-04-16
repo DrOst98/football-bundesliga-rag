@@ -1,6 +1,25 @@
-# Football Bundesliga: Subtopics and Sources
+# ⚽ Bundesliga RAG Knowledge Base
 
-**Homework Step 2**: 10 diverse subtopics with sources for DOCUMENTS list in app.py. Each covers unique aspects for 1-3 paragraphs (100-500 words).
+A semantic search application for Bundesliga football knowledge, built with **Streamlit**, **LangChain**, **ChromaDB**, and **sentence-transformers**.
+
+## 🚀 Live Demo
+
+[Try the live app](https://your-render-url.streamlit.app)
+
+## 📖 What it does
+
+This app lets you **search Bundesliga documents by meaning**, not just keywords. Ask questions about:
+- League history and founding
+- Structure and format
+- Top clubs and achievements
+- Famous derbies and rivalries
+- Records and statistics
+- Iconic players
+- Fan culture and atmosphere
+- 50+1 financial rules
+- Current
+
+# Football Bundesliga: Subtopics and Sources
 
 ## Subtopics Table
 
