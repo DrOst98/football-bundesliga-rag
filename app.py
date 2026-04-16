@@ -274,7 +274,7 @@ def build_vector_store(_documents: tuple):
         )
 
         splitter = RecursiveCharacterTextSplitter(
-            chunk_size=250,
+            chunk_size=150,
             chunk_overlap=40,
             separators=["\n\n", "\n", ". ", " ", ""],
         )
@@ -285,7 +285,7 @@ def build_vector_store(_documents: tuple):
         return vector_store, chunks
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=250,
+        chunk_size=150,
         chunk_overlap=40,
         separators=["\n\n", "\n", ". ", " ", ""],
     )
@@ -460,7 +460,7 @@ elif page == "Statistics":
     )
 
     splitter_current = RecursiveCharacterTextSplitter(
-        chunk_size=250,
+        chunk_size=150,
         chunk_overlap=40,
         separators=["\n\n", "\n", ". ", " ", ""],
     )
