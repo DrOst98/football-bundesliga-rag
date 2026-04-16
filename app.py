@@ -197,16 +197,6 @@ DOCUMENTS = [
     The league's competitive balance is maintained through financial regulations and revenue sharing. Bayern's dominance has sparked discussions about competitive parity.
     """,
 
-    # 6. Iconic Players and Legacies (~320 words)
-    """
-    The Bundesliga has produced legendary players who shaped football history. Gerd Müller, nicknamed 'Der Bomber,' scored 365 goals in 427 games for Bayern Munich, winning 4 titles and 3 European Cups. Franz Beckenbauer revolutionized the libero position, leading Bayern to 4 titles and earning the nickname 'Der Kaiser.'
-    Günter Netzer was Mönchengladbach's creative genius during their 1970s golden era. Lothar Matthäus captained Germany to the 1990 World Cup and won 7 Bundesliga titles with Bayern.
-    Modern icons include Robert Lewandowski, who scored 344 goals for Dortmund and Bayern, winning 11 titles. Manuel Neuer redefined goalkeeping with his sweeper-keeper style, winning 12 titles.
-    Michael Ballack led Leverkusen to the 2002 treble attempt and won titles with Bayern. Bastian Schweinsteiger was Bayern's midfield engine for a decade. Mats Hummels anchored Dortmund's defenses during their title wins.
-    Klinsmann, Rummenigge, and Breitner from the 1980s represented German football excellence. Current stars like Harry Kane continue the tradition at Bayern.
-    These players not only won trophies but changed how football is played. Beckenbauer invented the modern defender role, Müller redefined finishing, Neuer transformed goalkeeping. Their legacies extend beyond statistics to tactical innovation and cultural impact.
-    """,
-
     # 7. Current Season Highlights 2025/26 (~280 words)
     """
     The 2025/26 Bundesliga season features familiar faces and new challenges. Bayern Munich started strongly, defeating RB Leipzig 6-0 in their opener. Harry Kane continues his prolific scoring, leading Bayern's title defense.
@@ -235,18 +225,7 @@ DOCUMENTS = [
     Bayern Munich generates €800 million revenue through global brand, stadium, and Champions League. RB Leipzig challenges 50+1 through Red Bull sponsorship structure. Hertha BSC faced issues after investor Klaus-Michael Kühne acquired 66% shares.
     The DFL (German Football League) enforces squad cost rules limiting spending to 85% of revenue by 2025/26. This contrasts with state-owned clubs like PSG and Manchester City.
     50+1 preserves club identity and prevents financial doping. Critics argue it limits competitiveness against oil-funded rivals, but supporters value democratic structure. The model has influenced discussions in other leagues.
-    """,
-
-    # 10. International Impact and European Successes (~300 words)
-    """
-    The Bundesliga has won more UEFA Champions League titles (8) than any other league. Bayern Munich's 2020 final victory over PSG was their sixth. Dortmund won in 1997 against Juventus. Hamburg (1983) and Frankfurt (2022 Conference League) add to the tally.
-    German clubs reached 13 Champions League finals since 1997. Bayern's 2013 final featured three Bundesliga teams (Bayern, Dortmund, Leverkusen). The league's high-pressing, counter-attacking style translates well to Europe.
-    Bundesliga exports 500+ players annually, including Haaland, Bellingham, Musiala. The league serves as a development ground for talents before Premier League moves. Revenue from transfers (€1 billion+ annually) funds youth academies.
-    Global TV deals reach 200 countries, generating €1.1 billion. International fan bases grow through digital platforms and tours. The league's reputation for exciting football attracts viewers.
-    German clubs dominate European coefficients, securing extra Champions League spots. Financial model produces sustainable success rather than boom-bust cycles.
-    Success stories include Leverkusen's 2024 Europa League win and Frankfurt's 2022 Conference League triumph. Dortmund's 1997 Champions League victory remains a high point for non-Bayern clubs.
-    The Bundesliga's international impact extends to coaching. Klopp, Tuchel, Nagelsmann influence global tactics. The league balances domestic success with European competitiveness.
-    """      
+    """,   
 ]
 
 # =========================
