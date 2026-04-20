@@ -149,7 +149,7 @@ DOCUMENTS = [
 # =========================
 # Chunking
 # =========================
-def chunk_text(text, chunk_size=220, overlap=40):
+def chunk_text(text, chunk_size=180, overlap=40):
     words = text.split()
     chunks = []
     start = 0
@@ -163,13 +163,13 @@ def chunk_text(text, chunk_size=220, overlap=40):
 
     return chunks
 
-def build_chunks(documents, chunk_size=220, overlap=40):
+def build_chunks(documents, chunk_size=180, overlap=40):
     all_chunks = []
     for doc in documents:
         all_chunks.extend(chunk_text(doc, chunk_size=chunk_size, overlap=overlap))
     return all_chunks
 
-CHUNK_SIZE = 220
+CHUNK_SIZE = 180
 CHUNK_OVERLAP = 40
 chunks = build_chunks(DOCUMENTS, CHUNK_SIZE, CHUNK_OVERLAP)
 

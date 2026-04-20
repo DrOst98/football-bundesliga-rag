@@ -247,8 +247,8 @@ def build_vector_store(_documents: tuple):
     from langchain_community.vectorstores import Chroma
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=120,
-        chunk_overlap=20,
+        chunk_size=180,
+        chunk_overlap=40,
         separators=["\n\n", "\n", ". ", " ", ""],
     )
 
@@ -388,7 +388,7 @@ elif page == "Explore Chunks":
     st.subheader("Why chunking matters")
     st.write(
         "Chunking affects retrieval quality. Smaller chunks can be more precise, while larger chunks preserve more context. "
-        "This app uses chunk_size=120 and chunk_overlap=20 to keep memory usage low on deployment while still preserving useful context."
+        "This app uses chunk_size=180 and chunk_overlap=40 to keep memory usage low on deployment while still preserving useful context."
     )
     st.markdown('</div>', unsafe_allow_html=True)
 
