@@ -114,36 +114,75 @@ div[data-testid="metric-container"] {
 # DOCUMENTS
 # =========================
 DOCUMENTS = [
+      # 1. History and Founding of the Bundesliga (~350 words)
     """
-    The Bundesliga, Germany's top professional football league, was founded in 1963 to modernize and centralize German football. Before that, football in West Germany was organized in regional leagues called Oberligen. The national champion was decided through a playoff system between regional winners. After Germany’s disappointing performance at the 1962 World Cup, football officials wanted a stronger national league that could improve competition and player development. The German Football Association approved the Bundesliga in 1962, and the first season began in 1963. 1. FC Köln became the first champion. Over time, the Bundesliga developed into one of Europe’s strongest football leagues, known for passionate fans, strong clubs, and historic rivalries.
+    The Bundesliga, Germany's top professional football league, was founded in 1963 to modernize and centralize German football. Prior to its creation, football in West Germany was organized in regional leagues called Oberligen. The national champion was then decided through a playoff system between regional winners. After Germany’s disappointing performance at the 1962 World Cup, football officials wanted a stronger national league that could improve the level of competition and help German clubs and players develop more consistently.
+    On July 28, 1962, the German Football Association voted in favor of creating the Bundesliga. The league began with 16 founding clubs, selected according to sporting success, economic stability, and regional balance. The first Bundesliga season started in August 1963, and 1. FC Köln became the first champion. Over time, the league expanded, introduced promotion and relegation changes, and developed into one of the strongest football leagues in Europe.
+    Today, the Bundesliga is known for its history, strong fan culture, and competitive football. It has played an important role in the development of German football and has helped shape many world-class players and successful clubs.
     """,
+
+    # 2. League Structure and Format (~350 words)
     """
-    The Bundesliga consists of 18 teams and follows a double round-robin format. Each team plays every other team twice, once at home and once away, resulting in 34 matches per season. A win gives 3 points, a draw 1, and a loss 0. The team with the most points at the end of the season wins the title. The bottom two teams are automatically relegated to the 2. Bundesliga, while the top two teams from the second division are promoted. The team finishing 16th plays a relegation playoff. This structure keeps both the title race and relegation battle exciting. The season usually runs from August to May and also includes domestic and European competitions.
+    The Bundesliga consists of 18 teams that compete against each other in a double round-robin format. This means every club plays each other twice during the season: once at home and once away. As a result, each team plays 34 matches in total. A win gives a team 3 points, a draw gives 1 point, and a loss gives 0 points. At the end of the season, the club with the most points wins the Bundesliga title.
+    The bottom two teams are automatically relegated to the 2. Bundesliga, while the top two teams from the 2. Bundesliga are promoted. In addition, the team finishing 16th in the Bundesliga plays a relegation playoff against the team finishing 3rd in the second division. This system makes the league exciting not only at the top of the table, but also at the bottom.
+    The Bundesliga season usually runs from August to May and includes a winter break. Clubs also compete in domestic and European competitions such as the DFB-Pokal, UEFA Champions League, and UEFA Europa League.
     """,
+
+    # 3. Top Clubs and Achievements (~350 words)
     """
-    Bayern Munich is the most successful club in Bundesliga history and has won more league titles than any other team. Borussia Dortmund is another major club, famous for its supporters, attacking football, and rivalry with Bayern. Other important Bundesliga clubs include Borussia Mönchengladbach, Werder Bremen, and VfB Stuttgart. In recent years, Bayer Leverkusen and RB Leipzig have also become major competitors. Bundesliga clubs are judged not only by titles, but also by European success, youth development, and stadium atmosphere. These clubs have shaped the identity and history of German football for decades.
+    Bayern Munich is the most successful club in Bundesliga history and has won more league titles than any other team. The club has dominated German football for long periods, especially in the modern era. Borussia Dortmund is another major Bundesliga club, known for its passionate supporters, attacking football, and strong rivalry with Bayern Munich. Other important clubs include Borussia Mönchengladbach, Werder Bremen, and VfB Stuttgart.
+    These clubs have shaped the history of the league through championships, memorable matches, and famous players. In recent years, Bayer Leverkusen and RB Leipzig have also become important competitors in the Bundesliga. Leverkusen, in particular, has grown into a serious title contender and has challenged Bayern’s dominance.
+    The success of Bundesliga clubs is not only measured by league titles, but also by their performances in European competitions, their stadium atmosphere, and their ability to develop talented players.
     """,
+
+    # 4. Famous Rivalries and Derbies (~350 words)
     """
-    The Bundesliga is famous for passionate derbies and rivalries. Der Klassiker between Bayern Munich and Borussia Dortmund is one of the most important fixtures each season. The Revierderby between Borussia Dortmund and Schalke 04 is one of Germany’s fiercest local rivalries. Other notable derbies include the Rhine Derby, Nordderby, and Berlin Derby. These matches are known for emotional intensity, historic significance, and extraordinary atmospheres in the stadiums. Rivalries are an essential part of Bundesliga culture and contribute to the league’s popularity both inside and outside Germany.
+    The Bundesliga is home to some of the world's most passionate derbies. Der Klassiker between Bayern Munich and Borussia Dortmund is one of the most anticipated matches each season. This rivalry is not about geography but pure competition for the championship title. Bayern leads with 55 wins in 111 meetings, while Dortmund has 26 victories. The first Klassiker was in 1965, with Dortmund winning 2-0. Robert Lewandowski added intensity by scoring 23 goals against his former club Dortmund while playing for Bayern.
+    The Revierderby between Borussia Dortmund and Schalke 04 is known as the 'mother of all derbies.' These clubs from Germany's Ruhr industrial region have working-class fan bases and fierce local pride. Dortmund leads 37-32 in 100 Bundesliga meetings. A famous match was in 2017 when Dortmund led 4-0 at halftime but Schalke equalized 4-4. The clubs are just 20.5 miles apart, making it a true neighborhood battle.
+    The Original Klassiker pits Bayern Munich against Borussia Mönchengladbach. These teams dominated German football in the 1970s with stars like Gerd Müller and Günter Netzer. Bayern leads 54-28 in 113 matches. Gladbach won three straight titles from 1974-77 but Bayern has since dominated.
+    Other notable derbies include the Rhine Derby (Cologne vs. Mönchengladbach), Nordderby (Hamburg vs. Werder Bremen), and Berlin Derby (Hertha vs. Union Berlin). Each has unique history and passionate supporters. The Hamburg Derby between HSV and St. Pauli represents class differences, while the Baden-Swabia Derby between Stuttgart and Karlsruhe dates back to regional political rivalries.
+    These derbies create intense atmospheres and memorable moments that define Bundesliga culture.
     """,
+
+    # 5. Record Champions and Stats (~300 words)
     """
-    Bundesliga fan culture is widely considered one of the best in world football. German fans are known for standing terraces, choreographed tifos, and nonstop support during matches. Signal Iduna Park in Dortmund, with its famous Yellow Wall, is one of the most iconic stadiums in Europe. The Bundesliga is also known for relatively affordable ticket prices, which helps maintain strong connections between clubs and local communities. Matchday rituals, chants, scarves, and fan-led traditions create a unique atmosphere. This fan culture is one of the league’s defining strengths.
+    Bayern Munich holds the record with 33 Bundesliga titles since 1963, more than half of all championships. They achieved an unprecedented 11 consecutive titles from 2013 to 2023, the longest streak in any major European league. Bayern also won the 2024/25 title, extending their dominance.
+    Borussia Dortmund has 5 titles, including back-to-back wins in 1995/96 and 2011/12. Borussia Mönchengladbach also has 5 championships, winning three straight from 1975-77. Werder Bremen and Hamburger SV each have 4 titles, while VfB Stuttgart has 3.
+    Thirteen different clubs have won the Bundesliga in 61 seasons. Bayer Leverkusen ended Bayern's streak by winning their first title in 2023/24. 1. FC Köln won the inaugural 1963/64 championship.
+    Individual records include Gerd Müller's 365 goals for Bayern. Bayern set the points record with 91 in 2012/13. Manuel Neuer holds records for most clean sheets (212) and wins (311).
+    Financially, champions earn €65-70 million from domestic prize money plus Champions League revenue. 87% of recent champions reached the Champions League Round of 16.
+    The league's competitive balance is maintained through financial regulations and revenue sharing. Bayern's dominance has sparked discussions about competitive parity.
     """,
+
+    # 6. Current Season Highlights 2025/26 (~280 words)
     """
-    The Bundesliga's 50+1 rule requires clubs to retain majority fan ownership. At least 50 percent plus one voting share must remain with club members. This rule is designed to prevent full takeovers by outside investors and to preserve club identity. Supporters argue that it protects tradition, financial sustainability, and democratic involvement. Critics say it can limit clubs financially compared with leagues backed by billionaire or state ownership. Even so, 50+1 remains one of the defining features of German football and sets the Bundesliga apart from many other leagues.
+    The 2025/26 Bundesliga season features familiar faces and new challenges. Bayern Munich started strongly, defeating RB Leipzig 6-0 in their opener. Harry Kane continues his prolific scoring, leading Bayern's title defense.
+    Bayer Leverkusen, fresh off their 2023/24 breakthrough, aims to defend their recent success. Xabi Alonso's tactical innovations make them dangerous. Borussia Dortmund seeks to challenge Bayern in Der Klassiker matches.
+    RB Leipzig and VfB Stuttgart represent the new challengers. Leipzig's high-pressing style creates exciting matches. Union Berlin's defensive organization keeps them competitive.
+    Key fixtures include Bayern vs. Dortmund (October 18, 2025, Bayern won 2-1), Gladbach vs. Bayern (October 25, Bayern 3-0), and the Rhine Derby (Gladbach 3-1 Cologne). Attendance remains high, averaging over 38,000 per match.
+    Standings show Bayern leading, followed closely by Leverkusen and Dortmund. Relegation battle involves traditional clubs fighting for survival. Young talents like Florian Wirtz (Leverkusen) and Jamal Musiala (Bayern) shine.
+    European implications are significant, with top four spots determining Champions League qualification. The season promises drama with title race, derbies, and promotion battles.
     """,
+
+    # 7. Fan Culture and Atmosphere (~310 words)
     """
-    Bundesliga legends include Gerd Müller, Franz Beckenbauer, Lothar Matthäus, and Robert Lewandowski. These players helped define German football through goals, leadership, and tactical influence. Gerd Müller became famous for his extraordinary finishing ability, while Beckenbauer transformed the role of the libero. Modern stars like Lewandowski and Manuel Neuer continued the Bundesliga’s tradition of excellence. Their success made the league globally respected and influenced football far beyond Germany.
+    Bundesliga matches feature some of the world's best atmospheres. German fans are renowned for standing terraces, choreographed tifos, and passionate support throughout 90 minutes. The league averages over 38,000 spectators per match, second only to the English Premier League.
+    Signal Iduna Park (Dortmund) holds the record with 81,365 capacity. The Yellow Wall is football's largest standing terrace, creating an intimidating atmosphere for visiting teams. Borussia Dortmund fans sing "You'll Never Walk Alone" and coordinate massive displays.
+    Bayern Munich's Allianz Arena (75,000) features red LED lighting that changes color during matches. The Südkurve ultras group creates elaborate choreographies. Schalke 04's Veltins Arena (62,000) has a retractable roof and pitch, with passionate Ruhr area support.
+    St. Pauli's Millerntor-Stadion represents counterculture with left-wing politics and punk aesthetics. HSV fans maintain the North Stand tradition despite relegation. Union Berlin's Alte Försterei (22,000) punches above its size with intense support.
+    German football culture emphasizes community ownership through the 50+1 rule. Fans influence club decisions and maintain affordable tickets (€15-25 average). Pyrotechnics, though officially banned, remain part of the culture.
+    Matchday rituals include pre-game marches, scarves held aloft, and coordinated chants. The atmosphere contributes to the league's global appeal, with TV deals reaching 200+ countries.
     """,
+
+    # 8. Financial Rules like 50+1 (~290 words)
     """
-    The Bundesliga has strong international influence through European competitions, player development, coaching ideas, and global broadcasting. German clubs and coaches helped shape modern tactical football. Coaches like Jürgen Klopp and Thomas Tuchel spread Bundesliga ideas across Europe. The league is also respected for developing young players and combining financial sustainability with sporting success. This international reputation has strengthened the Bundesliga’s global profile.
-    """,
-    """
-    Matchday atmosphere is a key reason why the Bundesliga is admired worldwide. Stadiums are often full, fans sing throughout the match, and choreographed tifos create unforgettable visual experiences. Clubs like Dortmund, Union Berlin, and St. Pauli are especially known for strong local identity. Supporters see football as part of community life, not just entertainment. That combination of passion, identity, and affordability makes Bundesliga culture unique.
-    """,
-    """
-    Bayern Munich’s long dominance has shaped the Bundesliga era. Their success is based on strong finances, consistent management, elite players, and regular Champions League participation. However, competitors such as Borussia Dortmund and Bayer Leverkusen have challenged Bayern at different times. This tension between dominance and competition is a central theme in Bundesliga discussions. It also affects how fans think about fairness, rivalry, and excitement in the league.
-    """
+    The Bundesliga's 50+1 rule requires clubs to maintain majority fan ownership, distinguishing it from other leagues. At least 50% plus one share of voting rights must belong to club members. This prevents billionaire takeovers and ensures fan influence.
+    The rule promotes financial stability and prevents debt spirals seen elsewhere. Clubs cannot spend more than they earn through the licensing system. Revenue sharing distributes TV money equally (50%) rather than performance-based like Premier League.
+    Average Bundesliga ticket prices are €25, compared to €60+ in England. This accessibility builds strong fan bases and stadium atmospheres. Commercial revenue comes from sponsorships, merchandise, and international TV deals (€1.1 billion annually).
+    Bayern Munich generates €800 million revenue through global brand, stadium, and Champions League. RB Leipzig challenges 50+1 through Red Bull sponsorship structure. Hertha BSC faced issues after investor Klaus-Michael Kühne acquired 66% shares.
+    The DFL (German Football League) enforces squad cost rules limiting spending to 85% of revenue by 2025/26. This contrasts with state-owned clubs like PSG and Manchester City.
+    50+1 preserves club identity and prevents financial doping. Critics argue it limits competitiveness against oil-funded rivals, but supporters value democratic structure. The model has influenced discussions in other leagues.
+    """  
 ]
 
 # =========================
