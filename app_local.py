@@ -199,7 +199,7 @@ DOCUMENTS = [
     The league's competitive balance is maintained through financial regulations and revenue sharing. Bayern's dominance has sparked discussions about competitive parity.
     """,
 
-    # 7. Current Season Highlights 2025/26 (~280 words)
+    # 6. Current Season Highlights 2025/26 (~280 words)
     """
     The 2025/26 Bundesliga season features familiar faces and new challenges. Bayern Munich started strongly, defeating RB Leipzig 6-0 in their opener. Harry Kane continues his prolific scoring, leading Bayern's title defense.
     Bayer Leverkusen, fresh off their 2023/24 breakthrough, aims to defend their recent success. Xabi Alonso's tactical innovations make them dangerous. Borussia Dortmund seeks to challenge Bayern in Der Klassiker matches.
@@ -209,7 +209,7 @@ DOCUMENTS = [
     European implications are significant, with top four spots determining Champions League qualification. The season promises drama with title race, derbies, and promotion battles.
     """,
 
-    # 8. Fan Culture and Atmosphere (~310 words)
+    # 7. Fan Culture and Atmosphere (~310 words)
     """
     Bundesliga matches feature some of the world's best atmospheres. German fans are renowned for standing terraces, choreographed tifos, and passionate support throughout 90 minutes. The league averages over 38,000 spectators per match, second only to the English Premier League.
     Signal Iduna Park (Dortmund) holds the record with 81,365 capacity. The Yellow Wall is football's largest standing terrace, creating an intimidating atmosphere for visiting teams. Borussia Dortmund fans sing "You'll Never Walk Alone" and coordinate massive displays.
@@ -219,7 +219,7 @@ DOCUMENTS = [
     Matchday rituals include pre-game marches, scarves held aloft, and coordinated chants. The atmosphere contributes to the league's global appeal, with TV deals reaching 200+ countries.
     """,
 
-    # 9. Financial Rules like 50+1 (~290 words)
+    # 8. Financial Rules like 50+1 (~290 words)
     """
     The Bundesliga's 50+1 rule requires clubs to maintain majority fan ownership, distinguishing it from other leagues. At least 50% plus one share of voting rights must belong to club members. This prevents billionaire takeovers and ensures fan influence.
     The rule promotes financial stability and prevents debt spirals seen elsewhere. Clubs cannot spend more than they earn through the licensing system. Revenue sharing distributes TV money equally (50%) rather than performance-based like Premier League.
