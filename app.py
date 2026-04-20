@@ -339,7 +339,7 @@ elif page == "Statistics":
 
     st.subheader("Chunking strategy comparison")
     comparison_data = {}
-    for size in [160, 220, 300]:
+    for size in [100, 180, 260]:
         total_chunks = sum(len(chunk_text(doc, size, 40)) for doc in DOCUMENTS)
         comparison_data[f"chunk_size={size}"] = total_chunks
 

@@ -278,7 +278,7 @@ st.sidebar.markdown("---")
 st.sidebar.markdown("### Quick Topics")
 st.sidebar.markdown("- History\n- Clubs\n- Derbies\n- Fans\n- 50+1 Rule")
 st.sidebar.markdown("---")
-st.sidebar.info("Model: all-MiniLM-L6-v2\n\nChunking: 120 / 20")
+st.sidebar.info("Model: all-MiniLM-L6-v2\n\nChunking: 180 / 40")
 
 # =========================
 # Home
@@ -425,13 +425,13 @@ elif page == "Statistics":
     st.bar_chart({"Chunks": chunk_counts})
 
     st.subheader("Chunking strategy comparison")
-    chunk_sizes = [100, 120, 180]
+    chunk_sizes = [100, 180, 2600]
     comparison_data = {}
 
     for size in chunk_sizes:
         splitter = RecursiveCharacterTextSplitter(
             chunk_size=size,
-            chunk_overlap=20,
+            chunk_overlap=40,
             separators=["\n\n", "\n", ". ", " ", ""],
         )
         total_chunks = sum(len(splitter.split_text(doc.strip())) for doc in DOCUMENTS)
